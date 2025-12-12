@@ -185,3 +185,15 @@ html,body{
   .magic-overlay, .magic-particle{display:none}
 }
 /* Auth UI removed */
+
+/* Mobile performance fallback: reduce blurs/shadows and disable heavy effects */
+@media (max-width:720px){
+  .boot-overlay{ -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(4,6,10,0.75); }
+  .boot-inner{ -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow:0 8px 18px rgba(2,6,23,0.6); padding:14px; }
+  .boot-inner::before{ display:none }
+  .glow{ display:none !important; }
+  .cta{ -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow:none; border:1px solid rgba(255,255,255,0.04) }
+  .card, .step{ box-shadow:none; border:1px solid rgba(255,255,255,0.04); }
+  .magic-overlay, .magic-particle{ display:none !important }
+  .title, .hero, .sub{ will-change:auto }
+}

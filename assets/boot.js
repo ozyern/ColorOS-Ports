@@ -82,6 +82,8 @@
   function markMagicShown(){ try{ localStorage.setItem('magicShown_v1','1'); }catch(e){} }
 
   function runMagicEffect(){
+    // skip heavy particle effect on touch devices / small screens
+    if ('ontouchstart' in window || window.innerWidth < 720) return;
     if (!isFirstVisit()) return;
     const path = (location.pathname||'').split('/').pop() || 'index.html';
     if (!(path === '' || path === 'index.html' || path === 'home.html')) return;
@@ -129,6 +131,8 @@
 
   // Mouse parallax for hero: smooth, rAF-based, respects prefers-reduced-motion
   (function(){
+    // Disable parallax on touch devices or small screens to improve mobile performance
+    if ('ontouchstart' in window || window.innerWidth < 720) return;
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     let raf = null;
     let lastX = 0, lastY = 0;
