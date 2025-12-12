@@ -42,11 +42,27 @@
     // avoid duplicate
     if (document.getElementById('boot-overlay')) return;
     const overlay = createOverlay();
+    // on mobile/home, optionally lock scroll for a cleaner single-screen home
+    try{
+      const p = (location.pathname||'').split('/').pop() || 'index.html';
+      if (( 'ontouchstart' in window || window.innerWidth < 720) && (p === '' || p === 'index.html' || p === 'home.html')){
+        document.body.classList.add('home-noscroll');
+      }
+    }catch(e){}
     // prepare for smooth transition: start transparent then fade in
     overlay.style.opacity = '0';
     overlay.style.transition = 'opacity 360ms cubic-bezier(.2,.9,.2,1)';
     overlay.style.willChange = 'opacity';
+    // store and lock overflow to prevent scrolling while overlay is visible
+    let _savedRootOverflow = document.documentElement.style.overflow;
+    let _savedBodyOverflow = document.body.style.overflow;
+    let _savedBodyTouch = document.body.style.touchAction;
     document.body.appendChild(overlay);
+    try{
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    }catch(e){}
     // ensure paint before starting fade-in
     requestAnimationFrame(()=>{ overlay.style.opacity = '1'; });
 
@@ -58,6 +74,12 @@
         if (e.target !== overlay) return;
         overlay.removeEventListener('transitionend', onEnd);
         try{ overlay.remove(); }catch(e){}
+        // restore locked overflow/touch-action
+        try{
+          document.documentElement.style.overflow = _savedRootOverflow || '';
+          document.body.style.overflow = _savedBodyOverflow || '';
+          document.body.style.touchAction = _savedBodyTouch || '';
+        }catch(e){}
         // notify listeners that boot overlay finished
         try{ window.dispatchEvent(new CustomEvent('boot:done')); }catch(e){}
       };

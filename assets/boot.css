@@ -197,3 +197,9 @@ html,body{
   .magic-overlay, .magic-particle{ display:none !important }
   .title, .hero, .sub{ will-change:auto }
 }
+
+/* prevent scrolling on home page for small/touch devices (keeps visuals intact) */
+@media (max-width:720px){
+  .home-noscroll, .home-noscroll body{ overflow:hidden !important; touch-action:none !important; }
+  .home-noscroll html, .home-noscroll{ height:100vh; }
+}
