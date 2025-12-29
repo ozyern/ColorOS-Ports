@@ -22,7 +22,7 @@
     const subtitle = pageLabel();
     div.innerHTML = `
       <div class="boot-inner">
-        <div class="boot-logo">Qvznr</div>
+        <div class="boot-logo">ColorOS Ports</div>
         <div class="boot-sub">${subtitle}</div>
         <div class="boot-ring" aria-hidden="true">
           <svg class="spinner" viewBox="0 0 50 50" role="img" aria-label="Loading">
