@@ -295,6 +295,53 @@ body::after{
   text-align:center;
 }
 
+/* Content page styling */
+.container p, .container li{
+  color:rgba(255,255,255,0.85);
+  line-height:1.7;
+  font-size:16px;
+}
+
+.container ol, .container ul{
+  margin:20px 0;
+  padding-left:24px;
+}
+
+.container ol li, .container ul li{
+  margin:12px 0;
+}
+
+.container label{
+  display:block;
+  color:rgba(255,255,255,0.9);
+  font-weight:600;
+  margin-bottom:6px;
+  font-size:14px;
+}
+
+.container input, .container textarea{
+  width:100%;
+  padding:12px 16px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#fff;
+  font-family:inherit;
+  font-size:15px;
+  transition:border-color 200ms ease, background 200ms ease;
+}
+
+.container input:focus, .container textarea:focus{
+  outline:none;
+  border-color:rgba(255,111,163,0.4);
+  background:rgba(255,255,255,0.05);
+  box-shadow:0 0 0 3px rgba(255,111,163,0.1);
+}
+
+.container input::placeholder, .container textarea::placeholder{
+  color:rgba(255,255,255,0.3);
+}
+
 /* Cards and Steps */
 .card, .step{
   background:linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));

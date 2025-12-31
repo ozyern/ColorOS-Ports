@@ -22,8 +22,26 @@ document.addEventListener('DOMContentLoaded', function () {
     ev.preventDefault();
     const fileUrl = urlIn.value.trim();
     if(!fileUrl){ status.textContent = 'Please provide a URL.'; return; }
+    
+    // Only allow downloads from our website domain
+    const allowedDomains = ['qvznr.github.io', 'localhost', '127.0.0.1'];
+    try{
+      const urlObj = new URL(fileUrl);
+      const isAllowed = allowedDomains.some(domain => urlObj.hostname === domain || urlObj.hostname.endsWith('.' + domain));
+      if(!isAllowed){
+        status.textContent = 'Error: Downloads are only allowed from qvznr.github.io';
+        status.style.color = '#ff6fa3';
+        return;
+      }
+    }catch(err){
+      status.textContent = 'Error: Invalid URL';
+      status.style.color = '#ff6fa3';
+      return;
+    }
+    
     const filename = nameIn.value.trim() || fileUrl.split('/').pop() || 'download.bin';
     status.textContent = 'Starting download...';
+    status.style.color = 'rgba(255,255,255,0.78)';
 
     try{
       const resp = await fetch(fileUrl, {mode:'cors'});
