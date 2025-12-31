@@ -190,13 +190,16 @@ document.addEventListener('DOMContentLoaded', function () {
       btn.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
-        status.style.display = 'none'; // Hide status before download
+        status.style.display = 'none'; // Hide any previous messages
         mirrorResults.style.display = 'none'; // Close mirror results
         const mirrorDomain = this.getAttribute('data-mirror');
         const originalUrl = this.getAttribute('data-url');
         const newUrl = `https://${mirrorDomain}/${originalUrl.split('sourceforge.net/')[1] || 'projects/file'}`;
         urlIn.value = newUrl;
-        downloadBtn.click();
+        // Trigger download after a small delay
+        setTimeout(() => {
+          downloadBtn.click();
+        }, 100);
       });
     });
 
@@ -247,12 +250,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // For Sourceforge URLs, open in new tab (CORS restrictions prevent direct fetch)
-    if (fileUrl.includes('sourceforge') || fileUrl.includes('.dl.sourceforge.net')) {
+    if (fileUrl.includes('sourceforge.net') || fileUrl.includes('dl.sourceforge.net')) {
+      status.style.display = 'block';
       showInfo('Opening Sourceforge download in a new tab...');
+      window.open(fileUrl, '_blank');
       setTimeout(() => {
-        window.open(fileUrl, '_blank');
         status.style.display = 'none';
-      }, 500);
+      }, 2000);
       return;
     }
 
