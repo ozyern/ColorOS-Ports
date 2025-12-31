@@ -265,7 +265,8 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    // For Sourceforge URLs, use iframe to trigger download
+    // For Sourceforge URLs and any external downloads, trigger download via hidden iframe
+    // This allows IDM to catch the download properly
     const isSourceforge = fileUrl.includes('sourceforge.net') || 
                          fileUrl.includes('dl.sourceforge.net') ||
                          fileUrl.includes('use_mirror');
@@ -275,19 +276,33 @@ document.addEventListener('DOMContentLoaded', function () {
       showInfo('✓ Starting download from Sourceforge...');
       progressContainer.style.display = 'none';
       
-      // Open in a small popup window
-      const popup = window.open(fileUrl, 'sourceforgeDownload', 
-        'width=600,height=400,toolbar=no,menubar=no,scrollbars=yes');
-      
-      if (popup) {
-        showSuccess('✓ Download started in popup window!');
-      } else {
-        showError('Popup blocked. Please allow popups and try again.');
+      // Remove any existing download iframe
+      const existingFrame = document.getElementById('downloadFrame');
+      if (existingFrame) {
+        existingFrame.remove();
       }
+      
+      // Create a hidden iframe to trigger the download
+      // This method allows IDM to intercept the download
+      const iframe = document.createElement('iframe');
+      iframe.id = 'downloadFrame';
+      iframe.style.display = 'none';
+      iframe.src = fileUrl;
+      document.body.appendChild(iframe);
+      
+      showSuccess('✓ Download started! IDM should catch this download.');
+      
+      // Clean up iframe after a delay
+      setTimeout(() => {
+        const frame = document.getElementById('downloadFrame');
+        if (frame) {
+          frame.remove();
+        }
+      }, 10000);
       
       setTimeout(() => {
         status.style.display = 'none';
-      }, 3000);
+      }, 5000);
       
       return;
     }
