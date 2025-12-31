@@ -56,9 +56,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-// Download from best SourceForge mirror (skip testing to avoid errors)
+// Test SourceForge mirrors and download from fastest
 async function downloadWithMirrorTesting(fileUrl, filename, statusEl) {
-  statusEl.textContent = 'Preparing download from fastest mirror...';
+  statusEl.textContent = 'Testing SourceForge mirrors...';
   statusEl.style.color = '#ff6fa3';
 
   try {
@@ -66,35 +66,118 @@ async function downloadWithMirrorTesting(fileUrl, filename, statusEl) {
     const urlObj = new URL(fileUrl);
     const path = urlObj.pathname;
 
-    // Use PhoenixNAP (consistently fastest and most reliable mirror)
-    const bestMirror = 'https://phoenixnap.dl.sourceforge.net';
-    const downloadUrl = bestMirror + path;
-    
-    statusEl.textContent = 'Starting download from PhoenixNAP (fastest mirror)...';
+    // Common SourceForge mirrors
+    const mirrors = [
+      { name: 'PhoenixNAP', url: 'https://phoenixnap.dl.sourceforge.net' },
+      { name: 'CFHCable', url: 'https://cfhcable.dl.sourceforge.net' },
+      { name: 'Versaweb', url: 'https://versaweb.dl.sourceforge.net' },
+      { name: 'iWeb', url: 'https://iweb.dl.sourceforge.net' },
+      { name: 'DEAC-Riga', url: 'https://deac-riga.dl.sourceforge.net' },
+      { name: 'ManagedWay', url: 'https://managedway.dl.sourceforge.net' },
+      { name: 'Downloads', url: 'https://downloads.sourceforge.net' }
+    ];
+
+    statusEl.textContent = `Testing ${mirrors.length} mirrors (2MB each)...`;
+    const results = [];
+    const testSize = 2 * 1024 * 1024; // 2MB test
+
+    // Test mirrors in parallel with timeout
+    const testPromises = mirrors.map(async (mirror, index) => {
+      const testUrl = mirror.url + path;
+      statusEl.textContent = `Testing ${mirror.name}... (${index + 1}/${mirrors.length})`;
+      
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 5000); // 5 sec timeout
+        
+        const startTime = performance.now();
+        const response = await fetch(testUrl, {
+          method: 'GET',
+          headers: { 'Range': `bytes=0-${testSize - 1}` },
+          signal: controller.signal
+        });
+        clearTimeout(timeout);
+        
+        if (!response.ok) throw new Error('Failed');
+        
+        // Read response to measure real speed
+        const blob = await response.blob();
+        const endTime = performance.now();
+        const duration = endTime - startTime;
+        const speed = (blob.size / 1024 / 1024) / (duration / 1000); // MB/s
+        
+        console.log(`${mirror.name}: ${speed.toFixed(2)} MB/s (${duration.toFixed(0)}ms)`);
+        return { mirror: mirror.name, url: testUrl, speed, duration };
+      } catch (err) {
+        console.warn(`${mirror.name} failed:`, err.message);
+        return null;
+      }
+    });
+
+    // Wait for all tests to complete
+    const testResults = await Promise.all(testPromises);
+    const validResults = testResults.filter(r => r !== null);
+
+    if (validResults.length === 0) {
+      // Use PhoenixNAP as fallback
+      const fallbackUrl = 'https://phoenixnap.dl.sourceforge.net' + path;
+      statusEl.textContent = 'Using PhoenixNAP mirror (fallback)...';
+      statusEl.style.color = '#ff6fa3';
+      
+      setTimeout(() => {
+        const a = document.createElement('a');
+        a.href = fallbackUrl;
+        a.download = filename;
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        
+        statusEl.textContent = `Download started from PhoenixNAP`;
+        statusEl.style.color = '#4ade80';
+      }, 300);
+      return;
+    }
+
+    // Sort by speed (fastest first)
+    validResults.sort((a, b) => b.speed - a.speed);
+    const fastest = validResults[0];
+
+    statusEl.textContent = `Fastest: ${fastest.mirror} (${fastest.speed.toFixed(2)} MB/s). Downloading...`;
     statusEl.style.color = '#4ade80';
 
-    // Start download immediately
+    // Download from fastest mirror
     setTimeout(() => {
       const a = document.createElement('a');
-      a.href = downloadUrl;
+      a.href = fastest.url;
       a.download = filename;
       a.target = '_blank';
       document.body.appendChild(a);
       a.click();
       a.remove();
       
-      statusEl.textContent = `Download started from PhoenixNAP mirror`;
+      statusEl.textContent = `Downloading from ${fastest.mirror} (${fastest.speed.toFixed(2)} MB/s)`;
       statusEl.style.color = '#4ade80';
     }, 300);
 
   } catch(err) {
     console.error(err);
+    // Ultimate fallback
+    const urlObj = new URL(fileUrl);
+    const fallbackUrl = 'https://phoenixnap.dl.sourceforge.net' + urlObj.pathname;
+    
     statusEl.textContent = 'Starting download...';
     statusEl.style.color = '#4ade80';
     
-    // Direct fallback
     setTimeout(() => {
-      window.open(fileUrl, '_blank');
+      const a = document.createElement('a');
+      a.href = fallbackUrl;
+      a.download = filename;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      
       statusEl.textContent = 'Download started';
       statusEl.style.color = '#4ade80';
     }, 300);
