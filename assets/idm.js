@@ -246,6 +246,17 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
+    // For Sourceforge URLs, open in new tab (CORS restrictions prevent direct fetch)
+    if (fileUrl.includes('sourceforge') || fileUrl.includes('.dl.sourceforge.net')) {
+      showInfo('Opening Sourceforge download in a new tab...');
+      setTimeout(() => {
+        window.open(fileUrl, '_blank');
+        status.style.display = 'none';
+      }, 500);
+      return;
+    }
+
+    // For other URLs (qvznr.github.io), use fetch with progress
     const filename = nameIn.value.trim() || fileUrl.split('/').pop() || 'download.bin';
     status.style.display = 'block';
     showInfo('Starting download...');
