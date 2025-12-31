@@ -13,8 +13,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const downloadSpeed = document.getElementById('downloadSpeed');
   const downloadTime = document.getElementById('downloadTime');
 
-  // Allowed domains
-  const allowedDomains = ['qvznr.github.io', 'localhost', '127.0.0.1'];
+  // Allowed domains - your site and Sourceforge
+  const allowedDomains = [
+    'qvznr.github.io', 
+    'localhost', 
+    '127.0.0.1',
+    'sourceforge.net',
+    'downloads.sourceforge.net',
+    'sourceforge.mirrorservice.org'
+  ];
 
   // Prefill from query params (used by roms links)
   try {
@@ -72,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (!isAllowedDomain(fileUrl)) {
-      showError('Error: Downloads are only allowed from qvznr.github.io');
+      showError('Error: Downloads only work from qvznr.github.io and Sourceforge');
       return;
     }
 
@@ -90,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Validate domain
     if (!isAllowedDomain(fileUrl)) {
-      showError('Error: Downloads are only allowed from qvznr.github.io');
+      showError('Error: Downloads only work from qvznr.github.io and Sourceforge');
       return;
     }
 
