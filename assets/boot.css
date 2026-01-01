@@ -819,6 +819,12 @@ body.light-mode .rom-card p{color:rgba(15,17,21,0.8)}
     font-size:18px;
   }
   
+  .logo-container{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+  }
+  
   .logo-icon{
     width:28px;
     height:28px;
