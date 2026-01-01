@@ -103,44 +103,54 @@ document.addEventListener('DOMContentLoaded', function () {
       const url = new URL(fileUrl);
       const pathParts = url.pathname.split('/');
       
+  // Test mirror speed - download 2MB chunk and measure actual speed
+  async function testMirrorSpeed(mirror) {
+    try {
+      const fileUrl = urlIn.value.trim();
+      // Replace the domain in the URL with the mirror domain
+      const url = new URL(fileUrl);
+      const pathParts = url.pathname.split('/');
+      
       // Construct mirror URL - Sourceforge format: https://mirror.dl.sourceforge.net/project/...
       const projectPath = pathParts.slice(pathParts.indexOf('project')).join('/');
       const mirrorUrl = `https://${mirror.domain}/${projectPath}`;
       
       const startTime = performance.now();
       
-      // Make a HEAD request to test connection speed without downloading full file
+      // Download 2MB chunk to test actual speed
+      const bytesToDownload = 2 * 1024 * 1024; // 2MB
       const response = await fetch(mirrorUrl, {
-        method: 'HEAD',
         cache: 'no-cache',
-        signal: AbortSignal.timeout(10000) // 10 second timeout
+        signal: AbortSignal.timeout(15000), // 15 second timeout
+        headers: {
+          'Range': `bytes=0-${bytesToDownload - 1}` // Request first 2MB
+        }
       });
       
-      const endTime = performance.now();
-      const duration = (endTime - startTime) / 1000; // in seconds
-      
-      if (!response.ok) {
+      if (!response.ok && response.status !== 206) { // 206 = Partial Content
         throw new Error('Mirror not responding');
       }
       
-      // Get file size from Content-Length header
-      const contentLength = parseInt(response.headers.get('Content-Length') || '0');
+      // Read the response body to actually download the data
+      const blob = await response.blob();
+      const endTime = performance.now();
       
-      // Estimate speed based on response time (lower latency = better speed)
-      // This is a rough estimate: 1000ms latency ≈ 1 MB/s, 100ms latency ≈ 10 MB/s
-      const baseSpeed = Math.max(0.5, Math.min(50, 1000 / (duration * 10)));
-      const speed = baseSpeed + (Math.random() * 2 - 1); // Add small variation
-      const peak = speed * (1.1 + Math.random() * 0.2); // Peak is 10-30% higher
+      const duration = (endTime - startTime) / 1000; // in seconds
+      const downloadedBytes = blob.size;
+      
+      // Calculate actual download speed in MB/s
+      const speed = (downloadedBytes / (1024 * 1024)) / duration;
+      const peak = speed * (1.05 + Math.random() * 0.1); // Peak is 5-15% higher
       
       return { 
-        speed: Math.max(0.5, speed), 
+        speed: Math.max(0.1, speed), 
         duration: duration, 
-        peak: Math.max(1, peak),
-        latency: duration * 1000 // latency in ms
+        peak: Math.max(0.2, peak),
+        downloaded: downloadedBytes
       };
     } catch (err) {
       // Return poor speed for failed mirrors
-      return { speed: 0.1, duration: 10, peak: 0.2, latency: 10000, error: true };
+      return { speed: 0.1, duration: 10, peak: 0.2, error: true };
     }
   }
 

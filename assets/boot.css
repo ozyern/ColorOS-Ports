@@ -822,7 +822,9 @@ body.light-mode .rom-card p{color:rgba(15,17,21,0.8)}
   .logo-container{
     position:absolute;
     left:50%;
-    transform:translateX(-50%);
+    top:50%;
+    transform:translate(-50%, -50%);
+    z-index:10;
   }
   
   .logo-icon{
