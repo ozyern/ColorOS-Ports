@@ -1,10 +1,5 @@
 /* New Year 2026 Decorations with OxygenOS 16 Fluid Animations */
 
-/* Enhanced fluid transitions - OxygenOS 16 style */
-*{
-  transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1) !important;
-}
-
 /* New Year 2026 Badge */
 .ny-badge{
   position:fixed;
@@ -16,7 +11,7 @@
   -webkit-backdrop-filter:blur(12px);
   padding:8px 16px;
   border-radius:20px;
-  z-index:10000;
+  z-index:1000;
   font-size:13px;
   font-weight:600;
   color:#ffd700;
@@ -54,8 +49,8 @@
 .confetti-container{
   position:fixed;
   inset:0;
-  pointer-events:none;
-  z-index:9998;
+  pointer-events:none !important;
+  z-index:100;
   overflow:hidden;
 }
 
@@ -92,8 +87,8 @@
 .firework-container{
   position:fixed;
   inset:0;
-  pointer-events:none;
-  z-index:9997;
+  pointer-events:none !important;
+  z-index:99;
   overflow:hidden;
 }
 
@@ -149,8 +144,8 @@
 .sparkle-container{
   position:fixed;
   inset:0;
-  pointer-events:none;
-  z-index:9996;
+  pointer-events:none !important;
+  z-index:98;
   overflow:hidden;
 }
 
@@ -288,7 +283,7 @@ button:active,
   -webkit-backdrop-filter:blur(16px);
   padding:16px 32px;
   border-radius:24px;
-  z-index:9999;
+  z-index:1000;
   display:flex;
   gap:20px;
   align-items:center;
@@ -355,7 +350,7 @@ button:active,
   border:none;
   font-size:28px;
   cursor:pointer;
-  z-index:10000;
+  z-index:1000;
   box-shadow:0 8px 24px rgba(255,215,0,0.4);
   animation:celebrateBtnPulse 2s ease-in-out infinite, celebrateBtnFloat 3s ease-in-out infinite;
   transition:all 320ms cubic-bezier(0.33, 1, 0.68, 1);
