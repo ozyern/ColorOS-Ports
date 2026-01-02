@@ -332,52 +332,42 @@
 
   // Add fluid interactions (OxygenOS 16 style)
   function addFluidInteractions() {
-    // Add ripple effect to clickable elements
+    // Skip if already initialized
+    if (window._nyInteractionsInit) return;
+    window._nyInteractionsInit = true;
+
+    // Add ripple effect to clickable elements (non-blocking)
     document.addEventListener('click', function(e) {
       const clickable = e.target.closest('a, button, .cta, .nav-link, .card');
-      if (!clickable) return;
+      if (!clickable || clickable.classList.contains('no-ripple')) return;
 
-      const ripple = document.createElement('span');
-      ripple.className = 'ripple';
-      
-      const rect = clickable.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
-      const x = e.clientX - rect.left - size / 2;
-      const y = e.clientY - rect.top - size / 2;
+      try {
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        
+        const rect = clickable.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
 
-      ripple.style.width = ripple.style.height = size + 'px';
-      ripple.style.left = x + 'px';
-      ripple.style.top = y + 'px';
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
 
-      clickable.style.position = 'relative';
-      clickable.style.overflow = 'hidden';
-      clickable.appendChild(ripple);
+        const currentPosition = getComputedStyle(clickable).position;
+        if (currentPosition === 'static') {
+          clickable.style.position = 'relative';
+        }
+        clickable.style.overflow = 'hidden';
+        clickable.appendChild(ripple);
 
-      setTimeout(() => ripple.remove(), 800);
-    });
+        setTimeout(() => ripple.remove(), 800);
+      } catch (err) {
+        // Silently fail to not block interaction
+      }
+    }, { passive: true });
 
-    // Enhanced hover effects with fluid scaling
-    const interactiveElements = document.querySelectorAll('a, button, .cta, .nav-link, .card, .device-card, .rom-card');
-    
-    interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-4px) scale(1.02)';
-      });
-
-      el.addEventListener('mouseleave', function() {
-        this.style.transform = '';
-      });
-
-      el.addEventListener('mousedown', function() {
-        this.style.transform = 'scale(0.96)';
-      });
-
-      el.addEventListener('mouseup', function() {
-        this.style.transform = 'translateY(-4px) scale(1.02)';
-      });
-    });
-
-    // Smooth scroll with easing
+    // Smooth scroll with easing (for anchor links)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -394,31 +384,39 @@
       });
     });
 
-    // Parallax effect on scroll (fluid motion)
-    let ticking = false;
-    let lastScrollY = window.scrollY;
+    // Parallax effect on scroll (only on home page)
+    if (document.querySelector('.hero')) {
+      let ticking = false;
+      let lastScrollY = window.scrollY;
 
-    window.addEventListener('scroll', () => {
-      lastScrollY = window.scrollY;
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateParallax(lastScrollY);
-          ticking = false;
-        });
-        ticking = true;
+      window.addEventListener('scroll', () => {
+        lastScrollY = window.scrollY;
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            updateParallax(lastScrollY);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+
+      function updateParallax(scrollY) {
+        try {
+          const glow = document.querySelector('.glow');
+          if (glow) {
+            glow.style.transform = `translateX(-50%) translateY(${scrollY * 0.3}px)`;
+          }
+
+          const heroElements = document.querySelectorAll('.hero .title, .hero .sub, .hero .cta-row');
+          heroElements.forEach((el, index) => {
+            if (el) {
+              el.style.transform = `translateY(${scrollY * (0.1 * (index + 1))}px)`;
+            }
+          });
+        } catch (err) {
+          // Silently fail
+        }
       }
-    });
-
-    function updateParallax(scrollY) {
-      const glow = document.querySelector('.glow');
-      if (glow) {
-        glow.style.transform = `translateX(-50%) translateY(${scrollY * 0.3}px)`;
-      }
-
-      const heroElements = document.querySelectorAll('.hero .title, .hero .sub, .hero .cta-row');
-      heroElements.forEach((el, index) => {
-        el.style.transform = `translateY(${scrollY * (0.1 * (index + 1))}px)`;
-      });
     }
   }
 
