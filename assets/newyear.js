@@ -336,6 +336,13 @@
     if (window._nyInteractionsInit) return;
     window._nyInteractionsInit = true;
 
+    // Don't add ripple to pages with inline styles (like roms page)
+    const hasInlineHeavyContent = document.querySelector('div[onmouseover]');
+    if (hasInlineHeavyContent) {
+      console.log('Skipping ripple effects on this page for performance');
+      return;
+    }
+
     // Add ripple effect to clickable elements (non-blocking)
     document.addEventListener('click', function(e) {
       const clickable = e.target.closest('a, button, .cta, .nav-link, .card');
