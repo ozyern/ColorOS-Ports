@@ -58,7 +58,7 @@
       <!-- Image Section -->
       <div style="position:relative;min-width:0;">
         <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 0 60px rgba(255,64,129,0.3), 0 20px 60px rgba(255,64,129,0.15);border:1px solid rgba(255,64,129,0.2);">
-          <img src="https://i.imgur.com/8TqLZzY.png" alt="OnePlus 9 Pro" style="width:100%;display:block;border-radius:20px;" onerror="this.onerror=null;this.src='https://fdn2.gsmarena.com/vv/bigpic/oneplus-9-pro.jpg';">
+          <img src="https://fdn2.gsmarena.com/vv/bigpic/oneplus-9-pro.jpg" alt="OnePlus 9 Pro" style="width:100%;display:block;border-radius:20px;" onerror="this.onerror=null;this.src='https://images.91mobiles.com/wp-content/uploads/2021/03/OnePlus-9-Pro.jpg';">
           <div style="position:absolute;inset:0;background:linear-gradient(135deg, transparent 0%, rgba(255,64,129,0.1) 100%);border-radius:20px;pointer-events:none;"></div>
         </div>
       </div>
@@ -132,8 +132,8 @@
     </div>
 
     <!-- IDM Popup Modal -->
-    <div id="idmPopup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:9999;padding:20px;overflow-y:auto;align-items:center;justify-content:center;">
-      <div style="background:linear-gradient(135deg, rgba(20,20,30,0.98), rgba(10,10,20,0.98));border:1px solid rgba(255,64,129,0.3);border-radius:24px;max-width:800px;width:100%;max-height:90vh;overflow-y:auto;margin:auto;box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 100px rgba(255,64,129,0.2);">
+    <div id="idmPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:9999;">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(135deg, rgba(20,20,30,0.98), rgba(10,10,20,0.98));border:1px solid rgba(255,64,129,0.3);border-radius:24px;max-width:800px;width:calc(100% - 40px);max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 100px rgba(255,64,129,0.2);">
         <!-- Header -->
         <div style="padding:28px 32px;border-bottom:1px solid rgba(255,64,129,0.2);display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg, rgba(255,64,129,0.15), rgba(255,64,129,0.05));">
           <h2 style="margin:0;font-size:1.8rem;font-weight:900;color:#ff6fa3;letter-spacing:0.5px;">🚀 Select Download Mirror</h2>
@@ -186,7 +186,7 @@
     ];
 
     function showIDMPopup() {
-      document.getElementById('idmPopup').style.display = 'flex';
+      document.getElementById('idmPopup').style.display = 'block';
       document.body.style.overflow = 'hidden';
     }
 
