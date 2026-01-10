@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Installation Guide — ColorOS Ports</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -15,7 +16,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: radial-gradient(circle at top, #111 0%, #000 65%);
   color: #fff;
   overflow-x: hidden;
@@ -43,7 +44,7 @@ body {
 
 .nav-links {
   display: flex;
-  gap: 28px;
+  gap: 26px;
 }
 
 .nav-links a {
@@ -53,14 +54,13 @@ body {
   color: rgba(255,255,255,.55);
   text-decoration: none;
   padding: 10px 18px;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 .nav-links a.active {
   color: #fff;
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.12);
-  backdrop-filter: blur(10px);
 }
 
 .download-btn {
@@ -108,41 +108,11 @@ body {
 }
 
 .hero-credit {
-  margin-top: 14px;
+  margin-top: 16px;
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.35);
-}
-
-/* Scroll indicator */
-.scroll-indicator {
-  position: absolute;
-  right: 60px;
-  bottom: 90px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  text-transform: uppercase;
-  font-size: 10px;
-  letter-spacing: 3px;
-  color: rgba(255,255,255,0.45);
-}
-
-.scroll-arrow {
-  width: 14px;
-  height: 14px;
-  border-right: 1px solid rgba(255,255,255,0.6);
-  border-bottom: 1px solid rgba(255,255,255,0.6);
-  transform: rotate(45deg);
-  animation: scrollBounce 1.6s infinite;
-}
-
-@keyframes scrollBounce {
-  0% { transform: translateY(0) rotate(45deg); opacity: .4; }
-  50% { transform: translateY(10px) rotate(45deg); opacity: 1; }
-  100% { transform: translateY(0) rotate(45deg); opacity: .4; }
 }
 
 /* ================= CONTENT ================= */
@@ -152,120 +122,83 @@ body {
   padding: 140px 64px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 120px;
+  gap: 140px;
 }
 
 /* Phone */
 .phone {
-  position: relative;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
   perspective: 1200px;
 }
 
-.phone::before {
-  width: 620px;
-  height: 620px;
-  filter: blur(50px);
-}
-
-
-
 .phone img {
-  width: 420px;                 /* bigger, hero-sized */
+  width: 420px;
   height: auto;
-
-  transform:
-    rotateZ(-8deg)
-    rotateY(-14deg)
-    translateY(-10px);
-
+  transform: rotateZ(-6deg) rotateY(-12deg) translateY(-10px);
   filter:
     drop-shadow(0 70px 160px rgba(0,0,0,0.95))
     drop-shadow(0 0 90px rgba(255,255,255,0.08));
-
-  transition: transform 1s ease, opacity 1s ease;
 }
 
-
-/* Guide card */
+/* ================= GUIDE CARD ================= */
 .guide-card {
-  position: relative;
   max-width: 560px;
-  padding: 56px 52px;
-
-  border-radius: 26px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(28,28,28,0.85) 0%,
-      rgba(18,18,18,0.85) 100%
-    );
-
-  box-shadow:
-    0 80px 160px rgba(0,0,0,0.85),
-    inset 0 1px 0 rgba(255,255,255,0.08),
-    inset 0 -1px 0 rgba(0,0,0,0.6);
-
-  backdrop-filter: blur(26px);
-  -webkit-backdrop-filter: blur(26px);
-}
-.guide-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  border-radius: 26px;
-  padding: 1px;
-
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.14),
-    rgba(255,255,255,0.02)
-  );
-
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-
-  pointer-events: none;
+  padding: 64px 56px;
+  border-radius: 28px;
+  background: rgba(22,22,22,0.85);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
-
-
-/* Steps */
-.card {
-  background: rgba(255,255,255,0.035);
-  backdrop-filter: blur(26px);
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 36px;          /* bigger radius */
-  padding: 64px 72px;           /* rectangular feel */
-  width: 100%;
-  max-width: 560px;             /* key change */
+/* Headings */
+.guide-card h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 22px;
 }
 
+.guide-card h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 42px;
+  margin-bottom: 16px;
+}
 
-/* Commands */
+/* Text */
+.guide-card p,
+.guide-card li {
+  font-size: 14.5px;
+  line-height: 1.7;
+  letter-spacing: 0.15px;
+  opacity: 0.82;
+  margin-bottom: 10px;
+}
+
+/* Lists */
+.guide-card ul {
+  list-style: none;
+  margin-top: 14px;
+}
+
+/* Command blocks */
 code {
   display: block;
-  margin-top: 6px;
-  padding: 12px 16px;
-  background: rgba(0,0,0,.6);
-  border: 1px solid rgba(255,255,255,.08);
+  margin: 10px 0 16px;
+  padding: 14px 16px;
+  background: rgba(0,0,0,0.6);
   border-radius: 10px;
   font-family: monospace;
   font-size: 13px;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 /* Note */
 .note {
-  font-size: 12px;
-  color: rgba(255,255,255,.35);
-  margin-top: 12px;
+  margin-top: 18px;
+  font-size: 12.5px;
+  opacity: 0.5;
 }
 
 /* Mobile */
@@ -274,7 +207,10 @@ code {
     grid-template-columns: 1fr;
     padding: 120px 28px;
   }
-  .scroll-indicator { display: none; }
+
+  .phone img {
+    width: 360px;
+  }
 }
 </style>
 </head>
@@ -284,10 +220,10 @@ code {
 <header class="header">
   <div class="logo">ColorOS Ports</div>
   <nav class="nav-links">
-    <a href="home.html">Home</a>
-    <a href="roms.html">Explore Roms</a>
-    <a href="devices.html">Devices</a>
-    <a href="roms.html" class="download-btn">Download</a>
+    <a href="#" class="active">Guide</a>
+    <a href="#">Explore Roms</a>
+    <a href="#">Devices</a>
+    <a href="#" class="download-btn">Download</a>
   </nav>
 </header>
 
@@ -298,64 +234,38 @@ code {
     <p class="hero-line">Here You have to follow the steps EXACTLY</p>
     <p class="hero-credit">Ported By Aditya</p>
   </div>
-
-  <div class="scroll-indicator">
-    Scroll Down
-    <div class="scroll-arrow"></div>
-  </div>
 </section>
 
 <section class="content">
-  <div class="phone reveal">
+  <div class="phone">
     <img src="assets/op15.png" alt="OnePlus 15">
   </div>
 
-  <div class="card">
-    <div class="step reveal">
-      <h2>Before You Start(Prerequisito)</h2>
-      <ul>
-        <li>Unlocked bootloader</li>
-        <li>Latest official firmware installed</li>
-        <li>OrangeFox recovery downloaded</li>
-      </ul>
-    </div>
+  <div class="guide-card">
+    <h2>Before You Start</h2>
+    <ul>
+      <li>Unlocked bootloader</li>
+      <li>Latest official firmware installed</li>
+      <li>OrangeFox recovery downloaded</li>
+    </ul>
 
-    <div class="step reveal">
-      <h2>Step 1: Fastboot</h2>
-      <ul>
-        <li>Reboot to fastboot</li>
-        <code>adb reboot fastboot</code>
-        <li>Verify device</li>
-        <code>fastboot devices</code>
-        <li>Boot recovery</li>
-        <code>fastboot boot orangefox.img</code>
-      </ul>
-    </div>
+    <h3>Step 1: Fastboot</h3>
+    <p>Reboot your device into fastboot mode:</p>
+    <code>adb reboot fastboot</code>
 
-    <div class="step reveal">
-      <h2>Step 2: Sideload ROM</h2>
-      <ul>
-        <li>Format data</li>
-        <li>Select ADB sideload</li>
-        <code>adb sideload rom.zip</code>
-      </ul>
-      <p class="note">47% freeze is normal — installation continues.</p>
-    </div>
+    <p>Verify the device connection:</p>
+    <code>fastboot devices</code>
+
+    <p>Boot OrangeFox recovery:</p>
+    <code>fastboot boot orangefox.img</code>
+
+    <h3>Step 2: Sideload ROM</h3>
+    <p>Format data, then select ADB sideload and run:</p>
+    <code>adb sideload rom.zip</code>
+
+    <p class="note">Note: 47% freeze is normal. Installation continues automatically.</p>
   </div>
 </section>
-
-<script>
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add("show");
-  });
-}, { threshold: 0.2 });
-
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-</script>
-
-<script src="assets/ai-assistant.js"></script>
-<script src="assets/boot.js?v=2"></script>
 
 </body>
 </html>
