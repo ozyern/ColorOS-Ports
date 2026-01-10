@@ -128,18 +128,30 @@ body {
 /* Phone */
 .phone {
   display: flex;
+  align-items: center;
   justify-content: center;
+
+  min-height: 720px;   /* gives the image vertical room */
   perspective: 1200px;
 }
 
+
 .phone img {
-  width: 420px;
-  height: auto;
-  transform: rotateZ(-6deg) rotateY(-12deg) translateY(-10px);
+  width: 440px;          /* control size ONLY by width */
+  height: auto;          /* NEVER touch height */
+  aspect-ratio: auto;    /* ensure natural ratio */
+  object-fit: contain;   /* safety net */
+
+  transform: rotateZ(-6deg) rotateY(-12deg);
+  transform-origin: center;
+
   filter:
     drop-shadow(0 70px 160px rgba(0,0,0,0.95))
     drop-shadow(0 0 90px rgba(255,255,255,0.08));
+
+  display: block;
 }
+
 
 /* ================= GUIDE CARD ================= */
 .guide-card {
