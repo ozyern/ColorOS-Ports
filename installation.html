@@ -325,15 +325,15 @@ code {
   right: 60px;
   top: 50%;
   transform: translateY(-50%);
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
   z-index: 50;
 }
 
-.scroll-down.show {
-  display: flex;
+.scroll-down.hidden {
+  display: none;
 }
 
 .scroll-arrow {
@@ -396,6 +396,19 @@ code {
 
   .hamburger {
     display: flex;
+  }
+
+  .scroll-down {
+    right: 20px;
+  }
+
+  .scroll-arrow {
+    width: 20px;
+    height: 32px;
+  }
+
+  .scroll-label {
+    font-size: 10px;
   }
 
   .content {
@@ -607,30 +620,21 @@ code {
 </section>
 
 <script>
-// Show scroll indicator on desktop
-function toggleScrollIndicator() {
+// Hide scroll indicator when user scrolls
+function handleScrollIndicator() {
   const indicator = document.getElementById('scrollDown');
-  if (window.innerWidth > 1024) {
-    indicator.classList.add('show');
-  } else {
-    indicator.classList.remove('show');
-  }
   
-  // Hide when user scrolls
   window.addEventListener('scroll', () => {
     if (window.scrollY > 100) {
-      indicator.classList.remove('show');
+      indicator.classList.add('hidden');
     } else {
-      if (window.innerWidth > 1024) {
-        indicator.classList.add('show');
-      }
+      indicator.classList.remove('hidden');
     }
   });
 }
 
 // Initialize on page load
-window.addEventListener('load', toggleScrollIndicator);
-window.addEventListener('resize', toggleScrollIndicator);
+window.addEventListener('load', handleScrollIndicator);
 
 // Hamburger Menu Toggle
 const hamburger = document.getElementById('hamburger');
