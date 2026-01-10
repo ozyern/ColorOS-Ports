@@ -165,30 +165,29 @@ body {
 }
 
 .phone::before {
-  content: "";
-  position: absolute;
-  width: 520px;
-  height: 520px;
-  background: radial-gradient(circle,
-    rgba(255,255,255,0.10),
-    rgba(255,255,255,0.04),
-    transparent 70%);
-  filter: blur(40px);
-  z-index: -1;
+  width: 620px;
+  height: 620px;
+  filter: blur(50px);
 }
 
+
+
 .phone img {
-  width: 340px;              /* smaller = premium */
+  width: 420px;                 /* bigger, hero-sized */
   height: auto;
+
   transform:
     rotateZ(-8deg)
-    rotateY(-12deg)
-    translateY(-20px);
+    rotateY(-14deg)
+    translateY(-10px);
+
   filter:
-    drop-shadow(0 60px 140px rgba(0,0,0,0.95))
-    drop-shadow(0 0 80px rgba(255,255,255,0.08));
+    drop-shadow(0 70px 160px rgba(0,0,0,0.95))
+    drop-shadow(0 0 90px rgba(255,255,255,0.08));
+
   transition: transform 1s ease, opacity 1s ease;
 }
+
 
 /* Guide card */
 .card {
