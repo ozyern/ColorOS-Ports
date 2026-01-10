@@ -552,7 +552,7 @@ header {
   display: block;
 
   /* Scale bigger */
-  transform: scale(1.5) translateX(200px);
+  transform: scale(1.8) translateX(280px);
   transform-origin: center;
 
   /* Brightness & contrast tweak */
