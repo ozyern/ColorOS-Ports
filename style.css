@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  --font-display: "Anton", sans-serif;
+  --font-body: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1 {
+  font-family: var(--font-display);
+  letter-spacing: 1px;
+}
+
 /* ===== Header ===== */
 header {
   display: flex;
@@ -356,4 +372,176 @@ footer {
   .hamburger {
     display: flex;
   }
+}
+
+/* ===== Home (index.html) ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top right, #1a1a1a, #000);
+  color: #fff;
+}
+
+/* ===== HEADER ===== */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 28px 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.nav a {
+  margin-left: 40px;
+  text-decoration: none;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.nav a:hover {
+  color: #fff;
+}
+
+.download-btn {
+  background: #fff;
+  color: #000 !important;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* ===== HERO ===== */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 160px 70px 100px;
+}
+
+.hero-left {
+  max-width: 50%;
+}
+
+.status {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: #5cff5c;
+  background: rgba(255,255,255,0.08);
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.hero-left h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  opacity: 0.85;
+}
+
+.tagline {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: #aaa;
+}
+
+.desc {
+  margin-top: 14px;
+  max-width: 520px;
+  font-size: 0.95rem;
+  color: #777;
+}
+
+.hero-right {
+  position: relative;
+}
+
+.hero-right img {
+  width: 420px;
+  filter: drop-shadow(0 0 80px rgba(255,255,255,0.35));
+}
+
+.scroll {
+  position: absolute;
+  right: -40px;
+  bottom: 0;
+  writing-mode: vertical-rl;
+  font-size: 0.75rem;
+  color: #888;
+}
+
+/* ===== SECOND ===== */
+.secondary {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.secondary h3 {
+  color: #888;
+  font-weight: 400;
+}
+
+.secondary h2 {
+  font-size: 3rem;
+  margin: 10px 0;
+}
+
+.secondary p {
+  color: #777;
+  max-width: 600px;
+  margin: auto;
+}
+
+/* ===== FEATURES ===== */
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 80px 60px;
+}
+
+.card {
+  width: 300px;
+  padding: 30px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.card .icon {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.card h4 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 40px;
+  color: #666;
 }

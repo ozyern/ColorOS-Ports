@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap');
+
+:root{
+  --font-display:"Anton",sans-serif;
+  --font-body:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+
 /* Reduced transitions to avoid scroll lag */
 *, *::before, *::after {
   transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1) !important;
@@ -75,7 +82,7 @@
 }
 
 .boot-logo{
-  font-family:Orbitron,Inter,system-ui,Segoe UI,Roboto,Arial;
+  font-family:var(--font-display);
   font-weight:900;
   color:#ff6fa3;
   font-size:clamp(28px,8vw,72px);
@@ -122,12 +129,17 @@ html,body{
   min-height:100vh;
   background:#000;
   color:#fff;
-  font-family:'Orbitron',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-family:var(--font-body);
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   transform:translateZ(0);
   scroll-behavior:smooth;
+}
+
+h1{
+  font-family:var(--font-display);
+  letter-spacing:1px;
 }
 
 /* Dark gradient background with gaming aesthetic */
@@ -651,7 +663,7 @@ body.light-mode .rom-card p{color:rgba(15,17,21,0.8)}
 }
 
 .logo{
-  font-family:Orbitron,Inter,system-ui,Segoe UI,Roboto,Arial;
+  font-family:var(--font-display);
   font-weight:900;
   color:#fff;
   font-size:26px;
@@ -1146,7 +1158,7 @@ main, .container, body, html {
   bottom: 24px !important;
   left: 24px !important;
   z-index: 9998;
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-body);
 }
 
 .ai-chat-button {
