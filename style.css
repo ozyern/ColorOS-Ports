@@ -468,11 +468,29 @@ body {
 
 .hero-right {
   position: relative;
+  isolation: isolate;
 }
 
 .hero-right img {
   width: 420px;
   filter: drop-shadow(0 0 80px rgba(255,255,255,0.35));
+  position: relative;
+  z-index: 1;
+}
+
+.hero-right::before {
+  content: "";
+  position: absolute;
+  inset: -60px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(111,186,255,0.25), transparent 45%),
+    url('assets/light.jpg') center/contain no-repeat;
+  opacity: 0.45;
+  mix-blend-mode: screen;
+  filter: saturate(1.05) blur(2px);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .scroll {
