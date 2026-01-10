@@ -1,29 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>ColorOS Ports - ColorOS 16 & OxygenOS 16 ROMs for OnePlus</title>
-    <meta name="description" content="Download official ColorOS 16 and OxygenOS 16 ROM ports for OnePlus 8, 8 Pro, 9, and 9 Pro. Easy installation guide and latest firmware updates.">
-    <meta name="keywords" content="ColorOS 16, OxygenOS 16, OnePlus ROM, custom ROM, firmware">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://qvznr.github.io/">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" href="assets/favicon.png" type="image/png">
-    <link rel="stylesheet" href="assets/boot.css?v=2">
-    <script src="assets/ai-assistant.js" defer></script>
-    <script src="assets/boot.js?v=2" defer></script>
-    <script>
-      // wait for boot to finish, then redirect
-      window.addEventListener('boot:done', ()=>{
-        location.replace('home.html');
-      }, {once:true});
-      // fallback: if boot doesn't run, redirect after 1500ms
-      setTimeout(()=>{ if(location.pathname.endsWith('index.html')||location.pathname==='/') location.replace('home.html'); }, 1500);
-    </script>
-  </head>
-  <body>
-    <p>Redirecting to <a href="home.html">home</a>…</p>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ColorOS Ports</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="logo">ColorOS Ports</div>
+    <nav class="nav">
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Explore ROMs</a></li>
+        <li><a href="#">Supported Device</a></li>
+        <li><a href="#" class="btn-download">Download</a></li>
+      </ul>
+    </nav>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- ===== Hero Section ===== -->
+  <section class="hero">
+    <div class="hero-left">
+      <span class="badge">Actively Maintained</span>
+      <h1>Legends Never Die</h1>
+      <p>Bringing a New Life to Older OnePlus Devices</p>
+      <p class="subtext">A community-driven ROM porting platform focused on transparency, performance optimization, and long-term device support</p>
+    </div>
+
+    <div class="hero-right">
+      <img src="3081f987-992c-4e2b-893c-3328559764f9.png" alt="Hero Illustration">
+      <div class="scroll-down">Scroll Down ↓</div>
+    </div>
+  </section>
+
+  <!-- ===== Secondary Hero ===== -->
+  <section class="secondary-hero">
+    <span class="badge">Ready Dive in New OS</span>
+    <h2>Enjoy New Era</h2>
+    <h1>In Your Beast</h1>
+    <p>Experience the New Ui, New Feature without any Compromises in Performance and Stability</p>
+  </section>
+
+  <!-- ===== Features Section ===== -->
+  <section class="features">
+    <div class="feature-card">
+      <div class="icon">&lt;/&gt;</div>
+      <h3>Optimized OxygenOS Port Development</h3>
+      <p>Clean OxygenOS ports optimized for performance, stability, and daily usability on older devices.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🔔</div>
+      <h3>Active Community-Driven Development</h3>
+      <p>Development guided by real user feedback, testing reports, and continuous performance improvements.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🐞</div>
+      <h3>Open Bug & Issue Tracking</h3>
+      <p>Known bugs, limitations, and workarounds are clearly documented for complete user transparency.</p>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <p>&copy; 2026 ColorOS Ports. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
 </html>
