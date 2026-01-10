@@ -1,278 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Installation Guide — ColorOS Ports</title>
-    <meta name="description" content="Step-by-step installation guide for ColorOS and OxygenOS ROM ports">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      
-      body {
-        font-family: 'Inter', sans-serif;
-        background: #000;
-        color: #fff;
-        line-height: 1.6;
-      }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Installation Guide — ColorOS Ports</title>
 
-      /* Navigation */
-      .header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        padding: 30px 60px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
-      }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 
-      .logo {
-        font-size: 14px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-      }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-      .nav-links {
-        display: flex;
-        gap: 40px;
-        align-items: center;
-      }
+body {
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top, #111 0%, #000 65%);
+  color: #fff;
+  overflow-x: hidden;
+}
 
-      .nav-links a {
-        color: rgba(255, 255, 255, 0.6);
-        text-decoration: none;
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: 0.3s;
-      }
+/* ================= HEADER ================= */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 28px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: linear-gradient(to bottom, rgba(0,0,0,.85), transparent);
+}
 
-      .nav-links a:hover {
-        color: #fff;
-      }
+.logo {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
 
-      .download-btn {
-        background: #fff;
-        color: #000 !important;
-        padding: 10px 25px;
-        border-radius: 4px;
-        font-weight: 600;
-      }
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
 
-      /* Hero Section */
-      .hero {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        text-align: center;
-      }
+.nav-links a {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+}
 
-      .bg-text {
-        position: absolute;
-        font-size: 25vw;
-        font-weight: 900;
-        color: #2a2a2a;
-        z-index: 1;
-        letter-spacing: -8px;
-        pointer-events: none;
-      }
+.nav-links a.active {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+}
 
-      .hero-content {
-        z-index: 2;
-      }
+.download-btn {
+  background: #fff;
+  color: #000 !important;
+  border-radius: 999px;
+  font-weight: 600;
+}
 
-      .hero-title {
-        font-size: 18px;
-        font-weight: 300;
-        letter-spacing: 4px;
-        margin-bottom: 10px;
-        color: rgba(255,255,255,0.9);
-      }
+/* ================= HERO ================= */
+.hero {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
 
-      .hero-subtitle {
-        font-size: 12px;
-        color: rgba(255,255,255,0.4);
-        letter-spacing: 1px;
-      }
+.bg-text {
+  position: absolute;
+  font-size: 26vw;
+  font-weight: 900;
+  letter-spacing: -10px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.02)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  pointer-events: none;
+}
 
-      /* Scroll Indicator */
-      .scroll-indicator {
-        position: absolute;
-        right: 60px;
-        bottom: 100px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-      }
+.hero-content {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
 
-      .scroll-text {
-        writing-mode: vertical-rl;
-        font-size: 10px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: rgba(255,255,255,0.4);
-      }
+.hero-line {
+  font-size: 15px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+}
 
-      /* Instructions Section */
-      .content-section {
-        padding: 100px 60px;
-        max-width: 1400px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 80px;
-      }
+.hero-credit {
+  margin-top: 14px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
 
-      .phone-preview {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-      }
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  right: 60px;
+  bottom: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.45);
+}
 
-      .phone-mockup {
-        width: 100%;
-        max-width: 450px;
-        filter: drop-shadow(0 0 50px rgba(255,255,255,0.05));
-      }
+.scroll-arrow {
+  width: 14px;
+  height: 14px;
+  border-right: 1px solid rgba(255,255,255,0.6);
+  border-bottom: 1px solid rgba(255,255,255,0.6);
+  transform: rotate(45deg);
+  animation: scrollBounce 1.6s infinite;
+}
 
-      .guide-card {
-        background: #0a0a0a;
-        border: 1px solid rgba(255,255,255,0.05);
-        padding: 60px;
-        border-radius: 24px;
-      }
+@keyframes scrollBounce {
+  0% { transform: translateY(0) rotate(45deg); opacity: .4; }
+  50% { transform: translateY(10px) rotate(45deg); opacity: 1; }
+  100% { transform: translateY(0) rotate(45deg); opacity: .4; }
+}
 
-      .step-group {
-        margin-bottom: 50px;
-      }
+/* ================= CONTENT ================= */
+.content {
+  max-width: 1400px;
+  margin: auto;
+  padding: 140px 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 120px;
+}
 
-      .step-group h2 {
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 25px;
-        color: #fff;
-      }
+/* Phone */
+.phone {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
 
-      .instruction-list {
-        list-style: none;
-      }
+.phone::before {
+  content: "";
+  position: absolute;
+  inset: -80px;
+  background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+  z-index: -1;
+}
 
-      .instruction-list li {
-        font-size: 14px;
-        color: rgba(255,255,255,0.6);
-        margin-bottom: 15px;
-        padding-left: 25px;
-        position: relative;
-      }
+.phone img {
+  max-width: 360px;
+  height: auto;
+  filter:
+    drop-shadow(0 40px 120px rgba(0,0,0,0.9))
+    drop-shadow(0 0 60px rgba(255,255,255,0.08));
+  transform: translateY(80px);
+  opacity: 0;
+  transition: 1s ease;
+}
 
-      .instruction-list li::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 10px;
-        width: 6px;
-        height: 1px;
-        background: rgba(255,255,255,0.4);
-      }
+.phone.show img {
+  transform: translateY(0);
+  opacity: 1;
+}
 
-      code {
-        background: rgba(255,255,255,0.05);
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-family: monospace;
-        color: #fff;
-        font-size: 13px;
-      }
+/* Guide card */
+.card {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 28px;
+  padding: 56px;
+}
 
-      .note-text {
-        font-size: 12px;
-        color: rgba(255,255,255,0.3);
-        margin-top: 15px;
-        font-style: italic;
-      }
+/* Steps */
+.step {
+  margin-bottom: 48px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: .8s ease;
+}
 
-      @media (max-width: 1024px) {
-        .content-section { grid-template-columns: 1fr; }
-        .header { padding: 20px; }
-        .bg-text { font-size: 40vw; }
-      }
-    </style>
-  </head>
-  <body>
+.step.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    <header class="header">
-      <div class="logo">ColorOS Ports</div>
-      <nav class="nav-links">
-        <a href="home.html">Home</a>
-        <a href="roms.html">Explore Roms</a>
-        <a href="devices.html">Supported Device</a>
-        <a href="roms.html" class="download-btn">Download</a>
-      </nav>
-    </header>
+.step h2 {
+  font-size: 18px;
+  margin-bottom: 18px;
+}
 
-    <section class="hero">
-      <div class="bg-text">GUIDE</div>
-      <div class="hero-content" style="margin-top:-60px;">
-        <h1 class="hero-title">Here You have to follow the steps EXACTLY</h1>
-        <p class="hero-subtitle">Ported By Aditya</p>
-      </div>
-      <div class="scroll-indicator">
-        <span class="scroll-text">Scroll Down</span>
-        <div style="width: 1px; height: 60px; background: rgba(255,255,255,0.2);"></div>
-      </div>
-    </section>
+.step ul {
+  list-style: none;
+}
 
-    <section class="content-section">
-      <div class="phone-preview">
-        <img src="assets/guide-phone.png" alt="Device Preview" class="phone-mockup" onerror="this.onerror=null;this.src='assets/placeholder-phone.svg'">
-      </div>
+.step li {
+  font-size: 14px;
+  color: rgba(255,255,255,.65);
+  margin-bottom: 12px;
+}
 
-      <div class="guide-card">
-        <div class="step-group">
-          <h2>Prerequisites</h2>
-          <ul class="instruction-list">
-            <li>Unlocked bootloader is mandatory</li>
-            <li>Latest Official firmware update installed</li>
-            <li>OrangeFox Recovery image downloaded</li>
-          </ul>
-        </div>
+/* Commands */
+code {
+  display: block;
+  margin-top: 6px;
+  padding: 12px 16px;
+  background: rgba(0,0,0,.6);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  font-family: monospace;
+  font-size: 13px;
+}
 
-        <div class="step-group">
-          <h2>Step 1: Fastboot</h2>
-          <ul class="instruction-list">
-            <li>Reboot to fastboot: <code>adb reboot fastboot</code></li>
-            <li>Verify connection: <code>fastboot devices</code></li>
-            <li>Boot OrangeFox: <code>fastboot boot orangefox.img</code></li>
-          </ul>
-        </div>
+/* Note */
+.note {
+  font-size: 12px;
+  color: rgba(255,255,255,.35);
+  margin-top: 12px;
+}
 
-        <div class="step-group">
-          <h2>Step 2: Sideload</h2>
-          <ul class="instruction-list">
-            <li>Navigate to Recovery Menu</li>
-            <li>Select 'Format Data' (Wipe all data)</li>
-            <li>Select 'ADB Sideload'</li>
-            <li>Run: <code>adb sideload rom.zip</code></li>
-          </ul>
-          <p class="note-text">Note: 47% progress hang is normal. The device will handle the rest.</p>
-        </div>
-      </div>
-    </section>
+/* Mobile */
+@media(max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+    padding: 120px 28px;
+  }
+  .scroll-indicator { display: none; }
+}
+</style>
+</head>
 
-    <script src="assets/ai-assistant.js"></script>
-    <script src="assets/boot.js?v=2"></script>
-  </body>
+<body>
+
+<header class="header">
+  <div class="logo">ColorOS Ports</div>
+  <nav class="nav-links">
+    <a href="home.html">Home</a>
+    <a href="roms.html">Explore Roms</a>
+    <a href="devices.html">Devices</a>
+    <a href="roms.html" class="download-btn">Download</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="bg-text">GUIDE</div>
+
+  <div class="hero-content">
+    <p class="hero-line">Here You have to follow the steps EXACTLY</p>
+    <p class="hero-credit">Ported By Aditya</p>
+  </div>
+
+  <div class="scroll-indicator">
+    Scroll Down
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="phone reveal">
+    <img src="assets/op15.png" alt="OnePlus 15">
+  </div>
+
+  <div class="card">
+    <div class="step reveal">
+      <h2>Before You Start</h2>
+      <ul>
+        <li>Unlocked bootloader</li>
+        <li>Latest official firmware installed</li>
+        <li>OrangeFox recovery downloaded</li>
+      </ul>
+    </div>
+
+    <div class="step reveal">
+      <h2>Step 1: Fastboot</h2>
+      <ul>
+        <li>Reboot to fastboot</li>
+        <code>adb reboot fastboot</code>
+        <li>Verify device</li>
+        <code>fastboot devices</code>
+        <li>Boot recovery</li>
+        <code>fastboot boot orangefox.img</code>
+      </ul>
+    </div>
+
+    <div class="step reveal">
+      <h2>Step 2: Sideload ROM</h2>
+      <ul>
+        <li>Format data</li>
+        <li>Select ADB sideload</li>
+        <code>adb sideload rom.zip</code>
+      </ul>
+      <p class="note">47% freeze is normal — installation continues.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("show");
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+</script>
+
+<script src="assets/ai-assistant.js"></script>
+<script src="assets/boot.js?v=2"></script>
+
+</body>
 </html>
