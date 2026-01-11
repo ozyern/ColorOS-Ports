@@ -8,86 +8,235 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/boot.css">
+  <link rel="stylesheet" href="style.css">
   <style>
+    body {
+      font-family: var(--font-body);
+      background: #000;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 140px 24px 80px;
+    }
+
+    .page-hero {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      margin: 0 0 20px 0;
+      background: linear-gradient(135deg, #ff6fa3, #ff3366);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 2px;
+    }
+
+    .page-hero p {
+      color: rgba(255,255,255,0.7);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
     .version-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-top: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+      gap: 32px;
+      margin-top: 60px;
     }
+
     .version-card {
-      background: linear-gradient(135deg, rgba(255,64,129,0.1), rgba(255,64,129,0.05));
-      border: 1px solid rgba(255,64,129,0.2);
-      border-radius: 16px;
-      padding: 28px;
+      position: relative;
+      background: linear-gradient(135deg, rgba(255,64,129,0.08), rgba(255,64,129,0.04));
+      border: 1px solid rgba(255,64,129,0.25);
+      border-radius: 20px;
+      padding: 40px 32px;
       text-align: center;
       cursor: pointer;
-      transition: all .3s ease;
+      transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
+      overflow: hidden;
     }
+
+    .version-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(255,64,129,0.1), transparent 70%);
+      opacity: 0;
+      transition: opacity .4s ease;
+    }
+
+    .version-card:hover::before {
+      opacity: 1;
+    }
+
     .version-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(255,64,129,0.25);
-      border-color: rgba(255,64,129,0.4);
+      transform: translateY(-12px);
+      box-shadow: 0 24px 64px rgba(255,64,129,0.3), 0 0 40px rgba(255,64,129,0.15);
+      border-color: rgba(255,64,129,0.5);
     }
-    .version-tag {
-      background: linear-gradient(135deg, rgba(255,64,129,0.2), rgba(255,64,129,0.1));
+
+    .version-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 12px;
+      background: linear-gradient(135deg, #ff6fa3, #ff3366);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      box-shadow: 0 8px 24px rgba(255,64,129,0.3);
+    }
+
+    .version-card h3 {
+      margin: 0;
+      font-family: var(--font-display);
       color: #ff6fa3;
-      padding: 8px 16px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
     }
+
+    .version-tag {
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
     .version-tag.latest {
-      background: linear-gradient(135deg, rgba(0,217,255,0.2), rgba(0,217,255,0.1));
+      background: linear-gradient(135deg, rgba(0,217,255,0.25), rgba(0,217,255,0.15));
       color: #00d9ff;
+      border: 1px solid rgba(0,217,255,0.4);
+      box-shadow: 0 4px 16px rgba(0,217,255,0.2);
+    }
+
+    .version-tag.stable {
+      background: linear-gradient(135deg, rgba(76,175,80,0.25), rgba(56,142,60,0.15));
+      color: #4caf50;
+      border: 1px solid rgba(76,175,80,0.4);
+    }
+
+    .version-desc {
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .version-base {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+      margin: 0;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    @media (max-width: 768px) {
+      .page-container {
+        padding: 120px 20px 60px;
+      }
+
+      .version-grid {
+        gap: 24px;
+      }
+
+      .version-card {
+        padding: 32px 24px;
+      }
     }
   </style>
 </head>
-<body class="content-page">
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="logo">ColorOS Ports</div>
-      <button class="menu-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <nav class="site-nav">
-        <a href="home.html" class="nav-link">Home</a>
-        <a href="roms.html" class="nav-link">Roms</a>
-        <a href="devices.html" class="nav-link">Devices</a>
-        <a href="installation.html" class="nav-link">Installation Guide</a></nav>
-      <div class="header-actions">
-        <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
-      </div>
-    </div>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">ColorOS Ports</div>
+    <nav class="nav" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="roms.html" class="active">Explore ROMs</a>
+      <a href="devices.html">Supported Device</a>
+      <a href="installation.html">Installation Guide</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </header>
 
-  <main class="container" style="max-width:1000px;margin:110px auto;padding:24px;">
-    <h1>OxygenOS 16 (Port)</h1>
-    <p style="text-align:center;color:rgba(255,255,255,0.75);margin-bottom:40px;">Select a version to view supported devices</p>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="roms.html">Explore ROMs</a>
+    <a href="devices.html">Supported Device</a>
+    <a href="installation.html">Installation Guide</a>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="page-container">
+    <div class="page-hero">
+      <h1>OxygenOS 16</h1>
+      <p>Clean, minimalist UI with premium animations and optimized performance</p>
+    </div>
 
     <div class="version-grid">
       <a href="devices-oxygen-16.0.2.401.html" class="version-card">
-        <h3 style="margin:0;color:#ff6fa3;">OxygenOS 16.0.2.401</h3>
-        <span class="version-tag latest">LATEST</span>
-        <p style="margin:0;color:rgba(255,255,255,0.75);font-size:0.9rem;">Latest stable build with all optimizations</p>
-        <p style="margin:8px 0 0 0;color:rgba(255,255,255,0.6);font-size:0.85rem;">OnePlus 15 Base</p>
+        <div class="version-icon">📱</div>
+        <h3>16.0.2.401</h3>
+        <span class="version-tag latest">● Latest</span>
+        <p class="version-desc">Latest stable build with all optimizations and newest features</p>
+        <p class="version-base">Based on OnePlus 15 Global</p>
       </a>
+
       <a href="devices-oxygen-16.0.2.400.html" class="version-card">
-        <h3 style="margin:0;color:#ff6fa3;">OxygenOS 16.0.2.400</h3>
-        <span class="version-tag">STABLE</span>
-        <p style="margin:0;color:rgba(255,255,255,0.75);font-size:0.9rem;">Stable build with proven stability</p>
-        <p style="margin:8px 0 0 0;color:rgba(255,255,255,0.6);font-size:0.85rem;">OnePlus 12R Base</p>
+        <div class="version-icon">🔒</div>
+        <h3>16.0.2.400</h3>
+        <span class="version-tag stable">● Stable</span>
+        <p class="version-desc">Proven stability with long-term support and reliability</p>
+        <p class="version-base">Based on OnePlus 12R Global</p>
       </a>
     </div>
-  </main>
+  </div>
 
-  <script src="assets/boot.js?v=2"></script>
+  <script src="assets/boot.js"></script>
+  <script>
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.header') && !e.target.closest('.mobile-menu')) {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+      }
+    });
+  </script>
 </body>
 </html>
