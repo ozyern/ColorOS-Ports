@@ -96,7 +96,7 @@
       </div>
 
       <!-- Download Buttons -->
-      <button onclick="showModal()" style="padding: 16px 28px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 14px; color: #fff; font-weight: 700; cursor: pointer; font-size: 0.95rem; transition: all .3s ease; text-transform: uppercase; letter-spacing: 0.5px;"
+      <button onclick="directDownload()" style="padding: 16px 28px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 14px; color: #fff; font-weight: 700; cursor: pointer; font-size: 0.95rem; transition: all .3s ease; text-transform: uppercase; letter-spacing: 0.5px;"
               onmouseover="this.style.background='rgba(255,255,255,0.15)'"
               onmouseout="this.style.background='rgba(255,255,255,0.1)'">
         📥 Download ROM
@@ -121,40 +121,8 @@
   </div>
 </section>
 
-<!-- Modal -->
-<div id="downloadModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); z-index: 10000; align-items: center; justify-content: center; padding: 20px;">
-  <div style="background: rgba(15,15,20,0.98); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto;">
-    <div style="padding: 28px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
-      <h2 style="margin: 0; font-size: 1.6rem; font-weight: 700;">Download ROM</h2>
-      <button onclick="closeModal()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: #fff; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; font-size: 20px;">×</button>
-    </div>
-    <div style="padding: 28px;">
-      <p style="color: #aaa; margin: 0 0 20px 0;">Choose your preferred download mirror. IDM will automatically intercept the download.</p>
-      <button onclick="testMirror('freefr.dl.sourceforge.net')" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; font-weight: 700; cursor: pointer; transition: all .3s; margin-bottom: 10px;"
-              onmouseover="this.style.background='rgba(255,255,255,0.15)'"
-              onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-        🇫🇷 FreeFr Mirror
-      </button>
-      <button onclick="testMirror('delska.dl.sourceforge.net')" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; font-weight: 700; cursor: pointer; transition: all .3s; margin-bottom: 10px;"
-              onmouseover="this.style.background='rgba(255,255,255,0.15)'"
-              onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-        🇷🇸 Delska Mirror
-      </button>
-      <button onclick="testMirror('gigenet.dl.sourceforge.net')" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; font-weight: 700; cursor: pointer; transition: all .3s; margin-bottom: 10px;"
-              onmouseover="this.style.background='rgba(255,255,255,0.15)'"
-              onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-        🇺🇸 Gigenet Mirror
-      </button>
-      <button onclick="testMirror('phoenixnap.dl.sourceforge.net')" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; font-weight: 700; cursor: pointer; transition: all .3s; margin-bottom: 10px;"
-              onmouseover="this.style.background='rgba(255,255,255,0.15)'"
-              onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-        ⚡ PhoenixNAP Mirror
-      </button>
-    </div>
-  </div>
-</div>
+<!-- Modal Removed -->
 
-<script src="assets/idm.js"></script>
 <script src="assets/boot.js"></script>
 <script>
 const ROM_URL = 'https://sourceforge.net/projects/colorosports/files/OxygenOS%2016/16.0.3.501_OnePlus15/ota_full-LE2123_16.0.3.501-CPH2745.zip/download';
@@ -197,7 +165,6 @@ function closeModal() {
 
 function directDownload() {
   window.open(ROM_URL, '_blank');
-  setTimeout(() => closeModal(), 1000);
 }
 
 function downloadKernel() {
