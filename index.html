@@ -25,13 +25,18 @@
     /* ===== Light image (fixed size) ===== */
     .hero-light {
       position: absolute;
-      right: 50%;
-      top: 50%;
-      transform: translate(50%, -50%) scale(1.4);
-      height: auto;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      height: 100vh;
+      min-height: 100vh;
+      min-width: 100vw;
       width: auto;
-      max-height: none;
+      transform: scale(1.35);
+      object-fit: cover;
+      object-position: right center;
       max-width: none;
+      max-height: none;
       pointer-events: none;
       user-select: none;
     }
