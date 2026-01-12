@@ -6,6 +6,163 @@
   <title>ColorOS Ports</title>
   <link rel="icon" href="assets/favicon.jpg" type="image/png">
   <link rel="stylesheet" href="style.css" />
+  <link href='https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500&display=swap' rel='stylesheet'>
+  <style>
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      background: black;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* ===== Background Image ===== */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url("assets/light.jpg") no-repeat;
+      background-size: cover;
+      background-position: right center;
+      transform: scale(1.05);
+    }
+
+    /* ===== Dark Gradient ===== */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(0,0,0,0.95) 0%,
+        rgba(0,0,0,0.85) 40%,
+        rgba(0,0,0,0.4) 65%,
+        rgba(0,0,0,0.15) 80%,
+        rgba(0,0,0,0.05) 100%
+      );
+    }
+
+    /* ===== Door Glow ===== */
+    .hero-glow {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      width: 600px;
+      height: 600px;
+      transform: translateY(-50%);
+      background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.25) 0%,
+        rgba(255,255,255,0.12) 35%,
+        rgba(255,255,255,0.05) 55%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    /* ===== Film Grain ===== */
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+      opacity: 0.08;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+
+    /* ===== Content ===== */
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      max-width: 700px;
+      padding: 120px 80px;
+    }
+
+    /* Status badge */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 999px;
+      font-size: 13px;
+      color: #a8ff9e;
+      margin-bottom: 24px;
+    }
+
+    .status .dot {
+      width: 8px;
+      height: 8px;
+      background: #3cff00;
+      border-radius: 50%;
+    }
+
+    /* Title */
+    .hero h1 {
+      font-family: 'Anton', sans-serif;
+      font-size: 96px;
+      letter-spacing: -1px;
+      color: rgba(255,255,255,0.85);
+      margin: 0 0 24px 0;
+    }
+
+    /* Subtitle */
+    .subtitle {
+      font-size: 18px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 16px;
+    }
+
+    /* Description */
+    .desc {
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.5);
+      max-width: 520px;
+    }
+
+    /* ===== Scroll Indicator ===== */
+    .scroll-indicator {
+      position: absolute;
+      right: 40px;
+      bottom: 40px;
+      writing-mode: vertical-rl;
+      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .scroll-indicator span {
+      display: block;
+      height: 40px;
+      width: 1px;
+      background: rgba(255,255,255,0.4);
+      margin-top: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content {
+        padding: 80px 20px;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+      }
+
+      .desc {
+        font-size: 14px;
+      }
+
+      .scroll-indicator {
+        right: 20px;
+        bottom: 20px;
+        font-size: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -35,12 +192,19 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="hero-left">
-    <span class="status">● Actively Maintained</span>
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-grain"></div>
+
+  <div class="hero-content">
+    <span class="status">
+      <span class="dot"></span> Actively Maintained
+    </span>
 
     <h1>Legends Never Die</h1>
 
-    <p class="tagline">
+    <p class="subtitle">
       Bringing a New Life to Older OnePlus Devices
     </p>
 
@@ -50,10 +214,9 @@
     </p>
   </div>
 
-  <div class="hero-right">
-    <div class="light-wrap">
-      <img src="assets/light.jpg" alt="Light Portal">
-    </div>
+  <div class="scroll-indicator">
+    Scroll Down
+    <span></span>
   </div>
 </section>
 
