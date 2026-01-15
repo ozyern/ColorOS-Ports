@@ -163,6 +163,22 @@
 <script src="assets/boot.js?v=2"></script>
 
 <script>
+// Hide scroll indicator when user scrolls
+function handleScrollIndicator() {
+  const indicator = document.getElementById('scrollDown');
+  
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      indicator.classList.add('hidden');
+    } else {
+      indicator.classList.remove('hidden');
+    }
+  });
+}
+
+// Initialize on page load
+window.addEventListener('load', handleScrollIndicator);
+
 // Mobile nav toggle
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
