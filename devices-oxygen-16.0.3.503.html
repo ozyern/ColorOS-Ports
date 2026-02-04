@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OxygenOS 16.0.3.503 — Supported Devices</title>
+  <link rel="icon" href="assets/favicon.jpg" type="image/png">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    @media (max-width: 768px) {
+      section {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+      }
+      h1 {
+        font-size: 2.5rem !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">Reimagine</div>
+  <nav class="nav" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="roms.html" class="active">Explore ROMs</a>
+    <a href="devices.html">Supported Device</a>
+    <a href="installation.html">Installation Guide</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="roms.html">Explore ROMs</a>
+  <a href="devices.html">Supported Device</a>
+  <a href="installation.html">Installation Guide</a>
+</nav>
+
+<section style="padding: 220px 60px 80px; text-align: center;">
+  <span style="display: inline-block; font-size: 0.75rem; color: #5cff5c; background: rgba(92,255,92,0.15); padding: 6px 12px; border-radius: 20px; margin-bottom: 20px;">● Latest Version</span>
+  <h1 style="font-size: 3.5rem; margin-bottom: 20px; background: linear-gradient(to bottom, #fff 30%, rgba(255,255,255,0.4)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Version 16.0.3.503</h1>
+  <p style="color: #777; font-size: 1rem;">Select your device to download the ROM</p>
+</section>
+
+<section style="max-width: 1000px; margin: 0 auto; padding: 0 60px 100px;">
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px;">
+    
+    <a href="device-oneplus9pro-oxygen-16.0.3.503.html" style="text-decoration: none; color: inherit; padding: 32px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; transition: all .3s ease; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center;"
+       onmouseover="this.style.background='rgba(255,255,255,0.06)'; this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 60px rgba(255,255,255,0.1)'"
+       onmouseout="this.style.background='rgba(255,255,255,0.04)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+      <div style="width: 120px; height: 120px; background: rgba(255,255,255,0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 3rem; border: 1px solid rgba(255,255,255,0.1);">📱</div>
+      <h3 style="margin: 0; font-size: 1.3rem; font-weight: 700;">OnePlus 9 Pro</h3>
+      <p style="margin: 0; color: #666; font-size: 0.85rem;">LE2123</p>
+      <span style="background: rgba(92,255,92,0.15); color: #5cff5c; padding: 6px 14px; border-radius: 16px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">● Available</span>
+    </a>
+
+  </div>
+</section>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('active');
+});
+
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+  });
+});
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.header') && !e.target.closest('.mobile-menu')) {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+  }
+});
+</script>
+
+</body>
+</html>
