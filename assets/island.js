@@ -7,21 +7,49 @@
   if (!isMobile()) return;
 
   function createIsland(){
-    if (document.querySelector('.dynamic-island')) return;
-    const wrap = document.createElement('div');
-    wrap.className = 'dynamic-island';
-    wrap.innerHTML = `
-      <div class="island-pill" role="button" aria-expanded="false" tabindex="0">
-        <div class="island-mini">●</div>
-        <div class="island-content">
-          <div class="island-icon">R</div>
-          <div class="island-text">
-            <div style="font-weight:700">Reimagine</div>
-            <div style="font-size:0.85rem; opacity:.85">Tap for actions</div>
+    // prefer integrating into existing header for a native 'island' behavior
+    const header = document.querySelector('header.header, header');
+    let wrap;
+    if (header) {
+      // avoid duplicate
+      if (header.querySelector('.dynamic-island')) return;
+      wrap = document.createElement('div');
+      wrap.className = 'dynamic-island';
+      wrap.setAttribute('aria-hidden','false');
+      wrap.innerHTML = `
+        <div class="island-pill" role="button" aria-expanded="false" tabindex="0">
+          <div class="island-mini">●</div>
+          <div class="island-content">
+            <div class="island-icon">R</div>
+            <div class="island-text">
+              <div style="font-weight:700">Reimagine</div>
+              <div style="font-size:0.85rem; opacity:.85">Tap for actions</div>
+            </div>
           </div>
-        </div>
-      </div>`;
-    document.body.appendChild(wrap);
+        </div>`;
+      // position inside header
+      header.style.position = header.style.position || 'fixed';
+      header.appendChild(wrap);
+      // add helper class so CSS can style header when island present
+      header.classList.add('has-island');
+    } else {
+      // fallback to body anchored island
+      if (document.querySelector('.dynamic-island')) return;
+      wrap = document.createElement('div');
+      wrap.className = 'dynamic-island';
+      wrap.innerHTML = `
+        <div class="island-pill" role="button" aria-expanded="false" tabindex="0">
+          <div class="island-mini">●</div>
+          <div class="island-content">
+            <div class="island-icon">R</div>
+            <div class="island-text">
+              <div style="font-weight:700">Reimagine</div>
+              <div style="font-size:0.85rem; opacity:.85">Tap for actions</div>
+            </div>
+          </div>
+        </div>`;
+      document.body.appendChild(wrap);
+    }
 
     const pill = wrap.querySelector('.island-pill');
     let closeTimeout = null;

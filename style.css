@@ -1130,6 +1130,30 @@ footer {
   .dynamic-island .island-pill { touch-action: manipulation; }
 }
 
+/* When island is integrated inside the header */
+@media (max-width: 820px) {
+  header.has-island {
+    background: transparent !important;
+    border: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    height: auto;
+  }
+
+  header.has-island .logo { visibility: hidden; }
+
+  header.has-island .dynamic-island {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 8px;
+    pointer-events: auto;
+  }
+
+  /* ensure hamburger sits to the left and remains visible */
+  header.has-island .hamburger { left: 8px; position: absolute; top: 50%; transform: translateY(-50%); z-index: 1500; }
+}
+
 /* Additional fixes: header centering and element centering on small screens */
 @media (max-width: 820px) {
   /* Fix header positioning and center the logo */
